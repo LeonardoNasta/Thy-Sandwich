@@ -1,5 +1,8 @@
+var connection = require('./connections.js');
 
-var orm = {
+
+
+    var orm = {
 
     selectAll: function (cb) {
         var queryString = "SELECT * FROM sandwiches";
@@ -21,6 +24,7 @@ var orm = {
         });
     },
 
+   
     updateOne: function (id, cb) {
         var queryString = "UPDATE sandwich SET devoured = true WHERE id = ?";
 
