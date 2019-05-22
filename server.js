@@ -1,25 +1,27 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var exphbs = require("express-handlebars");
+var express = require('express');
+var bodyParser = require('body-parser');
 
-var app = express();
+
 var PORT = process.env.PORT || 8000;
 
-// Serve static folder.
+var app = express();
+
 app.use(express.static("public"));
 
-//setup json parsing middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({
+    defaultLayout: "main"
+}));
 app.set("view engine", "handlebars");
-
 
 var routes = require("./controllers/sandwich_controller.js");
 
-app.use(routes);
+app.use("/", routes);
 
 app.listen(PORT, function() {
     console.log("Server listening on: http://localhost:" + PORT);
-});
